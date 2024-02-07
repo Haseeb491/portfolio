@@ -3,7 +3,21 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import SideNavigation from "./SideNavigation";
-import { Children } from "react";
+import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+import { PlusIcon } from "@radix-ui/react-icons";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -39,8 +53,43 @@ export default async function MainLayout({ children }: MainLayoutProps) {
             <div className="">
 
             </div>
-            <div className="">
-
+            <div className="flex gap-6 justify-between">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant='default' > <PlusIcon className="mr-2" />  create </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56" align="end" >
+                  <Link href={"admin/projects/create"} >
+                    <DropdownMenuItem className=" text-gray-500 hover:bg-gray-300 rounded" >
+                      Project
+                    </DropdownMenuItem>
+                  </Link>
+                  <DropdownMenuSeparator />
+                  <Link href={"/admin/blogs/create"}>
+                    <DropdownMenuItem className=" text-gray-500 hover:bg-gray-300 rounded" >
+                      Blog
+                    </DropdownMenuItem>
+                  </Link>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Avatar>
+                    <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                    <AvatarFallback>{user?.email && user.email[0]}</AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56" align="end" >
+                  <DropdownMenuItem className="hover:bg-gray-300 rounded" >
+                    {user.email}
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="hover:bg-gray-300 rounded" >
+                    Log out
+                    <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         </header>
