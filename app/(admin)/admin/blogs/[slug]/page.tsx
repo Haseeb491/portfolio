@@ -1,15 +1,16 @@
+import BlogForm from '@/components/BlogForm'
 import React from 'react'
 
-interface BlogProps {
+interface BlogDetailPageProps {
     params: {
         slug: string,
     }
 }
 
-const Blog = ({ params }: BlogProps) => {
+const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
     return (
-        <div>Blog</div>
+        <BlogForm id={params.slug} />
     )
 }
 
-export default Blog
+export default BlogDetailPage

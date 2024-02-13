@@ -56,7 +56,7 @@ export default async function MainLayout({ children }: MainLayoutProps) {
             <div className="flex gap-6 justify-between">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant='default' > <PlusIcon className="mr-2" />  create </Button>
+                  <Button variant='ghost' > <PlusIcon className="mr-2" />  create </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56" align="end" >
                   <Link href={"admin/projects/create"} >
