@@ -27,7 +27,9 @@ const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
     console.log(response.data);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    fetchBlog();
+  }, []);
 
   return <BlogForm id={params.slug} />;
 };
