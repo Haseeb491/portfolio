@@ -1,16 +1,35 @@
-import BlogForm from '@/components/BlogForm'
-import React from 'react'
+"use client";
+
+import BlogForm from "@/components/BlogForm";
+import React, { useEffect, useReducer } from "react";
 
 interface BlogDetailPageProps {
-    params: {
-        slug: string,
-    }
+  params: {
+    slug: string;
+  };
 }
 
 const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
-    return (
-        <BlogForm id={params.slug} />
-    )
-}
+  const [response, setResponse] = useReducer(
+    (prev: any, next: any) => {
+      return { ...prev, ...next };
+    },
+    {
+      loading: true,
+    }
+  );
 
-export default BlogDetailPage
+  const fetchBlog = async () => {
+    const response = await fetch(`/api/blogs?id=${params.slug}`).then((res) =>
+      res.json()
+    );
+
+    console.log(response.data);
+  };
+
+  useEffect(() => {}, []);
+
+  return <BlogForm id={params.slug} />;
+};
+
+export default BlogDetailPage;
