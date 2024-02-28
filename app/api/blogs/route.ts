@@ -30,7 +30,16 @@ export async function POST(request: Request) {
 
 }
 export async function PATCH(request: Request) {
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+    const data = await request.json();
+    const {searchParams} = new URL(request.url)
+    const id = searchParams.get("id") 
 
+    const response = await supabase.from("blogs").update(data).eq('id', id)
+    .select().single();
+
+    return NextResponse.json(response);
 }
 export async function DELETE(request: Request) {
 

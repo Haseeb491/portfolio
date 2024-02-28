@@ -1,6 +1,7 @@
 "use client";
 
 import BlogForm from "@/components/BlogForm";
+import { data } from "autoprefixer";
 import React, { useEffect, useReducer } from "react";
 
 interface BlogDetailPageProps {
@@ -24,14 +25,18 @@ const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
       res.json()
     );
 
-    console.log(response.data);
+    setResponse({ data: response.data, loading: false });
   };
 
   useEffect(() => {
     fetchBlog();
   }, []);
 
-  return <BlogForm id={params.slug} />;
+  if (response.loading) {
+    return <h1>Loading...</h1>;
+  }
+
+  return <BlogForm id={params.slug} value={response?.data} />;
 };
 
 export default BlogDetailPage;
